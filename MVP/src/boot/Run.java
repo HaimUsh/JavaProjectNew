@@ -14,6 +14,7 @@ public class Run {
 		model.addObserver(p);
 		ui.addObserver(p);
 		ui.start();
+		System.out.println("check");
 		
 
 	}
