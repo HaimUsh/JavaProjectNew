@@ -64,7 +64,7 @@ public class MyModel extends Observable implements Model {
 
 	@Override
 	public HashMap<Maze3d, Solution> getSolutionList() {
-		// TODO Auto-generated method stub
+		//test
 		return null;
 	}
 
