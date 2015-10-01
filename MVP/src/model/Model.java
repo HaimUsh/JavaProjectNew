@@ -28,5 +28,14 @@ public interface Model {
 
 	public HashMap<Maze3d,Solution> getSolutionList();
 
+	public HashMap<String, Object> getCommandData();
+
+	public void officialExit();
+
+	
+
+	
+	
+
 }
 
