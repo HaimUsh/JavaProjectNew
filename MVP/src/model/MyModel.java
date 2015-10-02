@@ -10,7 +10,6 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.util.HashMap;
@@ -21,7 +20,6 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
-import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
 
 import search.AStar;
@@ -50,15 +48,15 @@ public class MyModel extends Observable implements Model {
 		this.solutionList= new HashMap<Maze3d, Solution>();
 
 		executer = Executors.newCachedThreadPool();
-		try 
-		{
-			loadFromZip();
-			changeAndNotify("loadZip", "Mazes has been loaded from file");
-		}
-		catch (Exception e) 
-		{
-			e.printStackTrace();
-		}
+//		try 
+//		{
+//			loadFromZip();
+//			changeAndNotify("loadZip", "Mazes has been loaded from file");
+//		}
+//		catch (Exception e) 
+//		{
+//			e.printStackTrace();
+//		}
 	}
 
 
@@ -86,7 +84,7 @@ public class MyModel extends Observable implements Model {
 	}
 
 	@Override
-	public void generate3dMaze(String name, int size) {
+	public void generate3DMaze(String name, int size) {
 		Future<Maze3d> myMaze = executer.submit(new Callable<Maze3d>()
 				{
 			@Override
@@ -179,7 +177,7 @@ public class MyModel extends Observable implements Model {
 	}
 
 	@Override
-	public void calcMazeSize(String name) {
+	public void MazeSize(String name) {
 		double size =-5;
 		if(getMazeList().containsKey(name))
 		{
@@ -196,7 +194,7 @@ public class MyModel extends Observable implements Model {
 	}
 
 	@Override
-	public void calcFileSize(String name) {
+	public void FileSize(String name) {
 		File f = new File(name);
 		if (f.length() == 0L)
 		{
@@ -210,7 +208,7 @@ public class MyModel extends Observable implements Model {
 	}
 
 	@Override
-	public void solve(String name, String algo) {
+	public void solveMaze(String name, String algo) {
 		if (getMazeList().containsKey(name))
 		{
 			Future<Solution> mySolution = executer.submit(new Callable<Solution>()
@@ -320,27 +318,27 @@ public class MyModel extends Observable implements Model {
 		}
 	}
 
-	@SuppressWarnings({ "unchecked" })
-	private void loadFromZip()
-	{
-		File myFile = new File("mazeSolutionCache.gzip");
-		try
-		{
-			if(!myFile.createNewFile())
-			{
-				ObjectInputStream mazeZip = new ObjectInputStream(new GZIPInputStream(new FileInputStream(myFile)));
-
-				this.mazeList = (HashMap<String, Maze3d>) mazeZip.readObject();
-				this.solutionList = (HashMap<Maze3d, Solution>) mazeZip.readObject();
-
-				mazeZip.close();
-			} 
-		}
-		catch (IOException | ClassNotFoundException e)
-		{
-			e.printStackTrace();
-		}
-	}
+//	@SuppressWarnings({ "unchecked" })
+//	private void loadFromZip()
+//	{
+//		File myFile = new File("mazeSolutionCache.gzip");
+//		try
+//		{
+//			if(!myFile.createNewFile())
+//			{
+//				ObjectInputStream mazeZip = new ObjectInputStream(new GZIPInputStream(new FileInputStream(myFile)));
+//
+//				this.mazeList = (HashMap<String, Maze3d>) mazeZip.readObject();
+//				this.solutionList = (HashMap<Maze3d, Solution>) mazeZip.readObject();
+//
+//				mazeZip.close();
+//			} 
+//		}
+//		catch (IOException | ClassNotFoundException e)
+//		{
+//			e.printStackTrace();
+//		}
+//	}
 
 
 

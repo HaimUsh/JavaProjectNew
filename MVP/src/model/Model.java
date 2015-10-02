@@ -10,7 +10,7 @@ public interface Model {
 
 	public void getFilesInDirectory(String path);
 
-	public void generate3dMaze(String name, int size);
+	public void generate3DMaze(String name, int size);
 
 	public void getCrossSection (char xyz, int index, String name);
 
@@ -18,11 +18,11 @@ public interface Model {
 
 	public void loadMaze (String mazeName, String fileName);
 
-	public void calcMazeSize(String name);
+	public void MazeSize(String name);
 
-	public void calcFileSize(String name);
+	public void FileSize(String name);
 
-	public void solve(String name, String algo);
+	public void solveMaze(String name, String algo);
 
 	public HashMap<String,Maze3d> getMazeList();
 

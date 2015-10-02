@@ -1,26 +1,68 @@
 package view;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.Observable;
+import java.util.Observer;
 
-import presenter.Presenter;
 import solution.Solution;
 import algorithms.mazeGenerators.Maze3d;
 
 public class MyView extends Observable implements View {
 
 	
-	CLI cli;
-	Presenter p;
+	BufferedReader in;
+	
+	PrintWriter out;
+	
+	ArrayList<Observer> Observers;
+	
+	Observable me;
+	
+	public MyView() {
+		Observers = new ArrayList<Observer>();
+		me = this;
+	}
 	
 	@Override
 	public void start() {
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		PrintWriter pw = new PrintWriter(System.out);
-		CLI cli = new CLI(br, pw,p.getCommandList());
-		cli.start(p);
+		in = new BufferedReader(new InputStreamReader(System.in));
+		out = new PrintWriter(System.out);
+		
+		new Thread(new Runnable()
+		{
+			@Override
+			public void run() 
+			{
+
+				System.out.print("Enter command (for cmd list, type \"menu\"): ");
+				try {
+					String line = in.readLine();
+
+					while (!line.equals("exit")) {
+						
+						notifyObservers(me, line);
+						System.out.print("Enter command: ");
+						line = in.readLine();
+					}
+
+					
+				} catch (IOException e) {
+					e.printStackTrace();
+				} finally {
+					try {
+						System.out.println("bye bye");
+						in.close();
+						out.close();
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				}
+		}
+			}).start();
 
 	}
 
@@ -99,4 +141,14 @@ public class MyView extends Observable implements View {
 
 	}
 
+	public void addObserver(Observer o){
+		if(!Observers.contains(o))
+			Observers.add(o);
+	}
+	
+	public void notifyObservers(Observable cameFrom, Object arg){
+		for (Observer observer : Observers) {
+			observer.update(cameFrom, arg);
+		}
+	}
 }

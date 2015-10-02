@@ -5,6 +5,8 @@ import java.util.Observable;
 import java.util.Observer;
 
 import model.Model;
+import model.MyModel;
+import view.MyView;
 import view.View;
 import controller.Command;
 import controller.CommandList;
@@ -29,10 +31,10 @@ public class Presenter implements Observer {
 	@Override
 	public void update(Observable o, Object arg) {
 
-		if (o instanceof Model)
+		if (o instanceof MyModel)
 		{
-			String data = ((String) arg);
-			switch (data)
+			String command = ((String) arg);
+			switch (command)
 			{
 			case "dir":
 			{
@@ -79,18 +81,16 @@ public class Presenter implements Observer {
 				
 
 			default:
-				ui.display("Model is going crazy (presenter.update.default)");
+				ui.display("ERROR!!!");
 				break;
 			}
 		}
 		else
 		{
-			if (o instanceof View)
+			if (o instanceof MyView)
 			{
-				String[] myData = ((String[]) arg);
-				String data=myData[0];
-				Command cData = commandList.get(myData[0]);
-				cData.doCommand(data,ui,model);
+;
+				invokeCommand((String)arg);
 			}
 			else
 			{
