@@ -1,6 +1,7 @@
 package boot;
 
 import presenter.Presenter;
+import view.MyBasicWindow;
 import view.MyView;
 import model.MyModel;
 
@@ -14,7 +15,7 @@ public class Run {
 		model.addObserver(p);
 		ui.addObserver(p);
 		ui.start();
-		
+		MyBasicWindow bw = new MyBasicWindow();
 		
 
 	}
