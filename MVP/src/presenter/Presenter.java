@@ -42,7 +42,7 @@ public class Presenter implements Observer {
 			} 	break;
 			case "generated":
 			{
-				ui.display("Maze "+model.getCommandData().get("generated")+" is ready" );
+				
 			}	break;
 			case "crossed":
 			{

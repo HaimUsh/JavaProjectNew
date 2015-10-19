@@ -3,6 +3,7 @@ package view;
 import solution.Solution;
 import algorithms.mazeGenerators.Maze3d;
 
+
 public interface View {
 
 
