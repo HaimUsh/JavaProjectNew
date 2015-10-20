@@ -554,8 +554,6 @@ public class Maze3d {
 	 */
 	public void print2dMaze(int[][] crossSection)
 	{
-		System.out.println("Your CrossSection:");
-		System.out.println();
 		for (int i = 0; i < crossSection.length; i++)
 		{
 			System.out.print("    ");

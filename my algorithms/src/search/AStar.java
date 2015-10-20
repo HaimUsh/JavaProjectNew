@@ -67,7 +67,7 @@ public class AStar extends CommonSearcher
 				}
 			}
 		}
-		System.out.println("no solution");
+		System.out.println("no solution!!");
 		return null;
 	}
 

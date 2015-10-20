@@ -24,6 +24,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
 
+import presenter.Properties;
 import search.AStar;
 import search.BFS;
 import search.CommonSearcher;
@@ -32,6 +33,7 @@ import solution.Solution;
 import algorithms.mazeGenerators.Maze3d;
 import algorithms.mazeGenerators.Maze3dGenerator;
 import algorithms.mazeGenerators.MyMaze3DGenerator;
+import algorithms.mazeGenerators.SimpleMaze3DGenerator;
 
 public class MyModel extends Observable implements Model {
 
@@ -40,6 +42,8 @@ public class MyModel extends Observable implements Model {
 	private HashMap<Maze3d, Solution> solutionList;
 
 	private HashMap<String, Object> commandData;
+	
+	private Properties properties;
 
 	ExecutorService executer;
 
@@ -48,17 +52,18 @@ public class MyModel extends Observable implements Model {
 		this.commandData=new HashMap<String, Object>();
 		this.mazeList= new HashMap<String, Maze3d>();
 		this.solutionList= new HashMap<Maze3d, Solution>();
+		this.properties= new Properties();
 
-		executer = Executors.newCachedThreadPool();
-//		try 
-//		{
-//			loadFromZip();
-//			changeAndNotify("loadZip", "Mazes has been loaded from file");
-//		}
-//		catch (Exception e) 
-//		{
-//			e.printStackTrace();
-//		}
+		executer = Executors.newFixedThreadPool(this.properties.getNumOfThreads());
+		try 
+		{
+			loadFromZip();
+			changeAndNotify("loadZip", "Mazes has been loaded from file");
+		}
+		catch (Exception e) 
+		{
+			e.printStackTrace();
+		}
 	}
 
 
@@ -93,6 +98,10 @@ public class MyModel extends Observable implements Model {
 			public Maze3d call() throws Exception
 			{
 				Maze3dGenerator mg = new MyMaze3DGenerator();
+				if (getProperties().getGenerateAlgo().equalsIgnoreCase("simple"))
+				{
+					mg = new SimpleMaze3DGenerator();
+				}
 				Maze3d myMaze = mg.generate(size, size, size);
 				return myMaze;
 			}
@@ -210,7 +219,7 @@ public class MyModel extends Observable implements Model {
 	}
 
 	@Override
-	public void solveMaze(String name, String algo) {
+	public void solveMaze(String name) {
 		if (getMazeList().containsKey(name))
 		{
 			Future<Solution> mySolution = executer.submit(new Callable<Solution>()
@@ -224,17 +233,17 @@ public class MyModel extends Observable implements Model {
 					Solution sol = new Solution();
 
 
-					if (algo.equalsIgnoreCase("astarman"))
+					if (properties.getSolveAlgo().equalsIgnoreCase("astarman"))
 					{
 						searcher = new AStar(new MazeManhattanDistance());
 						sol = searcher.search(sMaze);
 					}
-					if (algo.equalsIgnoreCase("astarair"))
+					if (properties.getSolveAlgo().equalsIgnoreCase("astarair"))
 					{
 						searcher = new AStar(new MazeEuclideanDistance());
 						sol = searcher.search(sMaze);
 					}
-					if (algo.equalsIgnoreCase("bfs"))
+					if (properties.getSolveAlgo().equalsIgnoreCase("bfs"))
 					{
 						searcher = new BFS();
 						sol = searcher.search(sMaze);
@@ -320,7 +329,7 @@ public class MyModel extends Observable implements Model {
 		}
 	}
 
-	@SuppressWarnings({ "unchecked", "unused" })
+	@SuppressWarnings({ "unchecked" })
 	private void loadFromZip()
 	{
 		File myFile = new File("mazeSolutionCache.gzip");
@@ -341,6 +350,19 @@ public class MyModel extends Observable implements Model {
 			e.printStackTrace();
 		}
 	}
+	
+	
+
+
+	public Properties getProperties() {
+		return properties;
+	}
+
+
+	public void setProperties(Properties properties) {
+		this.properties = properties;
+	}
+
 
 
 

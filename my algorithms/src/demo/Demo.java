@@ -40,12 +40,10 @@ public class Demo {
 		Maze3d myMaze = mg.generate(10, 10, 10);
 		System.out.print("Start Position : ");
 		System.out.println(myMaze.getStartPosition());
-		System.out.print("Finish Position : ");
+		System.out.print("Goal Position : ");
 		System.out.println(myMaze.getGoalPosition());
+		System.out.println("THE MAZE:");
 		int bound = myMaze.getLevels();
-		System.out.print("Printing the maze by ");
-		System.out.print((bound+1));
-		System.out.println(" Y levels: ");
 		for (int i = 0; i <= bound; i++)
 		{
 			try
@@ -55,14 +53,16 @@ public class Demo {
 			} 
 			catch (Exception e) 
 			{
-				System.out.println("Fatal Error with maze printaion");
 			}
 		}
 		Searchable sm = new SearchableMaze(myMaze);
+		System.out.println("bfs:");
 		Searcher sBFS = new BFS();
 		sBFS.search(sm);
+		System.out.println("astar man:");
 		Searcher sManhatan = new AStar(new MazeManhattanDistance());
 		sManhatan.search(sm);
+		System.out.println("astar air:");
 		Searcher sEuc = new AStar(new MazeEuclideanDistance());
 		sEuc.search(sm);
 
@@ -72,9 +72,8 @@ public class Demo {
 		System.out.print("AStar Manhatten algorithm has developed: ");
 		System.out.print(sManhatan.getNumberOfNodesEvaluated());
 		System.out.println(" states.");
-		System.out.print("ASter Euclidean algorithm has developed: ");
+		System.out.print("AStar Euclidean algorithm has developed: ");
 		System.out.print(sEuc.getNumberOfNodesEvaluated());
 		System.out.println(" states.");
-		System.out.println("check1");
 	}
 }

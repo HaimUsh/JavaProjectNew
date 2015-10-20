@@ -22,7 +22,7 @@ public interface Model {
 
 	public void FileSize(String name);
 
-	public void solveMaze(String name, String algo);
+	public void solveMaze(String name);
 
 	public HashMap<String,Maze3d> getMazeList();
 
@@ -31,9 +31,7 @@ public interface Model {
 	public HashMap<String, Object> getCommandData();
 
 	public void officialExit();
-
 	
-
 	
 	
 

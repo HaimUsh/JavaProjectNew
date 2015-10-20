@@ -35,7 +35,7 @@ public class BFS extends CommonSearcher
 			if(n.equals(s.getGoalState()))
 				return backTrace(n,s.getStartState()); 
 			closedSet.add(n); 
-			ArrayList<State> successors=s.getAllPossibleStates(n); //however it is implemented 
+			ArrayList<State> successors=s.getAllPossibleStates(n);  
 			for(State state : successors)
 			{
 				if(!closedSet.contains(state) && ! openList.contains(state))
@@ -65,7 +65,7 @@ public class BFS extends CommonSearcher
 				}
 			}
 		}
-		System.out.println("NO SLUTION FOR THIS MAZE!!!");
+		System.out.println("NO SLUTION!!");
 		return null; 
 	}
 }

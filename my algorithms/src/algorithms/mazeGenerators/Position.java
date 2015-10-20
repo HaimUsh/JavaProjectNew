@@ -48,7 +48,7 @@ public class Position {
 	@Override
 	public String toString(){
 		
-		return "{"+this.x+","+this.z+","+this.y+"}";
+		return this.x+","+this.z+","+this.y;
 	}
 
 	/**

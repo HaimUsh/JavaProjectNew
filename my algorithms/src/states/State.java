@@ -1,7 +1,6 @@
 package states;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
 import algorithms.mazeGenerators.Position;
 // TODO: Auto-generated Javadoc
@@ -11,16 +10,16 @@ import algorithms.mazeGenerators.Position;
  */
 public class State 
 {
-	
+
 	/** The state string. */
 	private String state;   
-	
+
 	/** The cost. */
 	private double cost;   			 
-	
+
 	/** The previous state. */
 	private State cameFrom;  		
-	
+
 	/** The h. */
 	private double g,h;					
 
@@ -34,7 +33,7 @@ public class State
 		this.g = 0;
 		this.h = 0;
 	}
-	
+
 	/**
 	 * Instantiates a new state.
 	 *
@@ -52,7 +51,7 @@ public class State
 		this.h = s1.h;
 
 	}
-	
+
 	/**
 	 * Gets the g.
 	 *
@@ -61,7 +60,7 @@ public class State
 	public double getG() {
 		return g;
 	}
-	
+
 	/**
 	 * Sets the g.
 	 *
@@ -71,7 +70,7 @@ public class State
 	{
 		this.g = g;
 	}
-	
+
 	/**
 	 * Gets the h.
 	 *
@@ -81,7 +80,7 @@ public class State
 	{
 		return h;
 	}
-	
+
 	/**
 	 * Sets the h.
 	 *
@@ -91,7 +90,7 @@ public class State
 	{
 		this.h = h;
 	}
-	
+
 	/**
 	 * Gets the state string.
 	 *
@@ -101,7 +100,7 @@ public class State
 	{
 		return state;
 	}
-	
+
 	/**
 	 * Sets the state string.
 	 *
@@ -111,7 +110,7 @@ public class State
 	{
 		this.state = new String(state);
 	}
-	
+
 	/**
 	 * Instantiates a new state.
 	 *
@@ -121,7 +120,7 @@ public class State
 	{      
 		this.state = new String(state);
 	}
-	
+
 	/**
 	 * Prints the.
 	 */
@@ -129,7 +128,7 @@ public class State
 	{
 		System.out.println(this.getstate());
 	}
-	
+
 	/**
 	 * Gets the previous state.
 	 *
@@ -139,7 +138,7 @@ public class State
 	{
 		return cameFrom;
 	}
-	
+
 	/**
 	 * Sets the previous state.
 	 *
@@ -151,7 +150,7 @@ public class State
 		this.cameFrom = prevState;
 
 	}
-	
+
 	/* (non-Javadoc)
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
@@ -160,7 +159,7 @@ public class State
 	{ 
 		return state.equals(((State)obj).state);
 	}
-	
+
 	/**
 	 * Gets the cost.
 	 *
@@ -170,7 +169,7 @@ public class State
 	{
 		return cost;
 	}
-	
+
 	/**
 	 * Sets the cost.
 	 *
@@ -180,7 +179,7 @@ public class State
 	{
 		this.cost = cost;
 	}
-	
+
 	/**
 	 * Sets the came from.
 	 *
@@ -191,7 +190,7 @@ public class State
 		this.cameFrom =n;
 
 	}
-	
+
 	/**
 	 * Calc cost.
 	 */
@@ -199,7 +198,7 @@ public class State
 	{
 		this.cost = this.g + this.h;
 	}
-	
+
 	/**
 	 * Calc g.
 	 *
@@ -210,22 +209,49 @@ public class State
 	{
 		this.g = g+ price;
 	}
-	
+
 	/**
 	 * String arrayto state array.
 	 *
 	 * @param pArray the array
 	 * @return the array list
 	 */
-	public ArrayList<State> stringArraytoStateArray (ArrayList<String> pArray)
+	public ArrayList<State> stringArraytoStateArray (ArrayList<String> pArray,State s1)
 	{
+
 		ArrayList<State> sArray = new ArrayList<State>();
-		for (Iterator<String> iterator = pArray.iterator(); iterator.hasNext();) 
-		{
-			String string1 = (String) iterator.next();
-			State sTemp = new State(string1);
-			sTemp.toString();
-			sArray.add(sTemp);
+		State s;
+		for (int i = 0; i < pArray.size(); i++) {
+		s=s1;
+		String str= pArray.get(i);
+		switch (str){
+		
+		case "RIGHT":
+			moveState(s, "RIGHT");
+			sArray.add(s);
+			break;
+		case "LEFT":
+			moveState(s, "LEFT");
+			sArray.add(s);
+			break;
+		case "UP":
+			moveState(s, "UP");
+			sArray.add(s);
+			break;
+		case "DOWN":
+			moveState(s, "DOWN");
+			sArray.add(s);
+			break;
+		case "BACK":
+			moveState(s, "BACK");
+			sArray.add(s);
+			break;
+		case "FORWARD":
+			moveState(s, "FORWARD");
+			sArray.add(s);
+			break;
+		}
+		
 		}
 		return sArray;
 	}
@@ -244,5 +270,44 @@ public class State
 		p.setZ(Integer.parseInt(seperatedArray[1]));
 		p.setY(Integer.parseInt(seperatedArray[2]));
 		return p;
+	}
+
+	public void moveState(State s, String move){
+
+		Position p= stateToPosition(s.getstate());
+		switch(move){
+		case "RIGHT":{
+			p.setX(p.getX()+1);
+			s.setstate(p.toString());
+			break;
+		}
+		case "LEFT":{
+			p.setX(p.getX()-1);
+			s.setstate(p.toString());
+			break;
+		}		
+		case "UP":{
+			p.setY(p.getY()+1);
+			s.setstate(p.toString());
+			break;
+		}
+		case "DOWN":{
+			p.setY(p.getY()-1);
+			s.setstate(p.toString());
+			break;
+		}
+		case "FORWARD":{
+			p.setZ(p.getZ()+1);
+			s.setstate(p.toString());
+			break;
+		}
+		case "BACK":{
+			p.setZ(p.getZ()-1);
+			s.setstate(p.toString());
+			break;
+		}
+		}		
+
+
 	}
 }
