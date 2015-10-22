@@ -216,42 +216,35 @@ public class State
 	 * @param pArray the array
 	 * @return the array list
 	 */
-	public ArrayList<State> stringArraytoStateArray (ArrayList<String> pArray,State s1)
+	public ArrayList<State> stringArraytoStateArray (ArrayList<String> pArray)
 	{
-
+		
 		ArrayList<State> sArray = new ArrayList<State>();
-		State s;
 		for (int i = 0; i < pArray.size(); i++) {
-		s=s1;
+		State s=new State(this);
 		String str= pArray.get(i);
 		switch (str){
 		
 		case "RIGHT":
 			moveState(s, "RIGHT");
-			sArray.add(s);
 			break;
 		case "LEFT":
 			moveState(s, "LEFT");
-			sArray.add(s);
 			break;
 		case "UP":
 			moveState(s, "UP");
-			sArray.add(s);
 			break;
 		case "DOWN":
 			moveState(s, "DOWN");
-			sArray.add(s);
 			break;
 		case "BACK":
 			moveState(s, "BACK");
-			sArray.add(s);
 			break;
 		case "FORWARD":
 			moveState(s, "FORWARD");
-			sArray.add(s);
 			break;
 		}
-		
+		sArray.add(s);
 		}
 		return sArray;
 	}

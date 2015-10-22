@@ -37,7 +37,7 @@ public class Demo {
 	public static void run()
 	{
 		Maze3dGenerator mg = new MyMaze3DGenerator();
-		Maze3d myMaze = mg.generate(10, 10, 10);
+		Maze3d myMaze = mg.generate(4, 4, 4);
 		System.out.print("Start Position : ");
 		System.out.println(myMaze.getStartPosition());
 		System.out.print("Goal Position : ");

@@ -101,7 +101,7 @@ public class SearchableMaze implements Searchable
 	public ArrayList<State> getAllPossibleStates(State s1) 
 	{
 		ArrayList<String> stringList = maze.getPossibleMovesInArrayList(s1);
-		ArrayList<State> statesList = s1.stringArraytoStateArray(stringList,s1);
+		ArrayList<State> statesList = s1.stringArraytoStateArray(stringList);
 
 		return statesList;
 	}
