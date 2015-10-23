@@ -349,7 +349,7 @@ public class Maze3d {
 	public boolean isInBound(Moves move, Position p){
 		switch (move){
 		case UP:{
-			if (p.y +1 < this.getLevels())
+			if (p.y +1 < this.getLevels() - 1)
 			{
 				return true;	
 			}
@@ -363,7 +363,7 @@ public class Maze3d {
 			break;
 		}
 		case RIGHT:{
-			if (p.x +1 < this.getRows())
+			if (p.x +1 < this.getRows() - 1)
 			{
 				return true;	
 			}
@@ -380,7 +380,7 @@ public class Maze3d {
 		}
 
 		case FORWARD:{
-			if (p.z +1 < this.getCols())
+			if (p.z +1 < this.getCols() - 1)
 			{
 				return true;	
 			}
@@ -431,43 +431,40 @@ public class Maze3d {
 	{
 		switch (move)
 		{
+		case UP:
+		if(isInBound(move,p))
+			if(this.maze3d[p.x][p.z][p.y+1]==0)
+				return true;
+		break;
+		case DOWN:
+		if(isInBound(move,p))
+			if(this.maze3d[p.x][p.z][p.y-1]==0)
+				return true;
+		break;
 
-		case UP:{
-			if(isInBound(move,p))
-				if(this.maze3d[p.x][p.z][p.y+1]==0)
-					return true;
-		}
-		case DOWN:{
-			if(isInBound(move,p))
-				if(this.maze3d[p.x][p.z][p.y-1]==0)
-					return true;
-		}
+		case LEFT:
+		if(isInBound(move,p))
+			if(this.maze3d[p.x-1][p.z][p.y]==0)
+				return true;
+		break;
 
-		case LEFT:{
-			if(isInBound(move,p))
-				if(this.maze3d[p.x-1][p.z][p.y]==0)
-					return true;
-		}
+		case RIGHT:
+		if(isInBound(move,p))
+			if(this.maze3d[p.x+1][p.z][p.y]==0)
+				return true;
+		break;
 
-		case RIGHT:{
-			if(isInBound(move,p))
-				if(this.maze3d[p.x+1][p.z][p.y]==0)
-					return true;
-		}
+		case FORWARD:
+		if(isInBound(move,p))
+			if(this.maze3d[p.x][p.z+1][p.y]==0)
+				return true;
+		break;
 
-		case FORWARD:{
-			if(isInBound(move,p))
-				if(this.maze3d[p.x][p.z+1][p.y]==0)
-					return true;
-		}
-
-		case BACK:{
-			if(isInBound(move,p))
-				if(this.maze3d[p.x][p.z-1][p.y]==0)
-					return true;
-		}
-
-
+		case BACK:
+		if(isInBound(move,p))
+			if(this.maze3d[p.x][p.z-1][p.y]==0)
+				return true;
+		break;
 		}
 		return false;
 
