@@ -18,6 +18,8 @@ public class Run {
 		ui.start();
 		BasicWindow bs = new MazeWindow("maze", 800, 400);
 		bs.run();
+		//test
+		
 	}
 
 }
