@@ -2,6 +2,8 @@ package boot;
 
 import model.MyModel;
 import presenter.Presenter;
+import view.BasicWindow;
+import view.MazeWindow;
 import view.MyView;
 
 public class Run {
@@ -14,8 +16,8 @@ public class Run {
 		model.addObserver(p);
 		ui.addObserver(p);
 		ui.start();
-		
-
+		BasicWindow bs = new MazeWindow("maze", 800, 400);
+		bs.run();
 	}
 
 }

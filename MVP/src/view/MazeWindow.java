@@ -7,11 +7,9 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.layout.GridLayout;
-import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.MenuItem;
-import org.eclipse.swt.widgets.Shell;
 
 public class MazeWindow extends BasicWindow {
 
@@ -25,7 +23,7 @@ public class MazeWindow extends BasicWindow {
 
 	@Override
 	void initWidgets() {
-		shell.setLayout(new GridLayout(3,false));
+		shell.setLayout(new GridLayout(2,false));
 		 Menu menuBar = new Menu(shell, SWT.BAR);
 
 		
@@ -60,7 +58,8 @@ public class MazeWindow extends BasicWindow {
 				@Override
 				public void widgetSelected(SelectionEvent arg0) {
 					FileDialog dlg = new FileDialog(shell, SWT.OPEN);
-				    String fileName = dlg.open();
+				    @SuppressWarnings("unused")
+					String fileName = dlg.open();
 					
 				}
 
@@ -103,7 +102,7 @@ public class MazeWindow extends BasicWindow {
 				@Override
 				public void widgetSelected(SelectionEvent arg0) {
 					shell.getDisplay().dispose();
-					System.exit(0);
+					
 				}
 				
 				@Override
