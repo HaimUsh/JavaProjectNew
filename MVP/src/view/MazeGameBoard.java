@@ -9,5 +9,8 @@ public class MazeGameBoard extends Canvas {
 		super(parent, style);
 		// TODO Auto-generated constructor stub
 	}
+	
 
+	
+	
 }

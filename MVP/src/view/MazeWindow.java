@@ -7,11 +7,12 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.MenuItem;
 
-public class MazeWindow extends BasicWindow {
+public class MazeWindow extends BasicWindow{
 
 	Timer timer;
 	TimerTask task;
@@ -25,7 +26,7 @@ public class MazeWindow extends BasicWindow {
 	void initWidgets() {
 		shell.setLayout(new GridLayout(2,false));
 		 Menu menuBar = new Menu(shell, SWT.BAR);
-
+		 
 		
 		    Menu fileMenu = new Menu(menuBar);
 
@@ -36,7 +37,7 @@ public class MazeWindow extends BasicWindow {
 
 
 		    MenuItem newMazeItem = new MenuItem(fileMenu, SWT.CASCADE);
-		    newMazeItem.setText("Generate New Maze");
+		    newMazeItem.setText("New");
 		    
 		    Menu popupMenu = new Menu(newMazeItem);
 		    newMazeItem.setMenu(popupMenu);
@@ -46,11 +47,7 @@ public class MazeWindow extends BasicWindow {
 		    
 		    MenuItem maze3DItem = new MenuItem(newMenu, SWT.NONE);
 		    maze3DItem.setText("Generate 3D Maze");
-		    
-//		    MenuItem maze2DItem = new MenuItem(newMenu, SWT.NONE);
-//		    maze2DItem.setText("Generate 2D Maze");
-
-		    
+	 
 		    MenuItem openItem = new MenuItem(fileMenu, SWT.NONE);
 		    openItem.setText("Open Properties");
 		    openItem.addSelectionListener(new SelectionListener() {
@@ -129,6 +126,22 @@ public class MazeWindow extends BasicWindow {
 		    
 		    shell.setMenuBar(menuBar);
 		    
+		    Button gb = new Button(shell,SWT.PUSH);
+		    gb.setText("Generate Maze");
+		    gb.addSelectionListener(new SelectionListener() {
+				
+				@Override
+				public void widgetSelected(SelectionEvent e) {
+					//e.notifyAll();
+					System.out.println("button pushed");
+				}
+				
+				@Override
+				public void widgetDefaultSelected(SelectionEvent arg0) {
+					// TODO Auto-generated method stub
+					
+				}
+			});
 	}
 		
 	
