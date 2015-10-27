@@ -7,7 +7,9 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Combo;
+import org.eclipse.swt.widgets.Label;
 
 public class ServerDisplay extends BasicWindow {
 	Image image;
@@ -27,15 +29,21 @@ public class ServerDisplay extends BasicWindow {
 
 	@Override
 	void initWidgets() {
-		shell.setLayout(new GridLayout(2,false));
+		shell.setLayout(new GridLayout(3,false));
 		shell.setBackgroundImage(image);
 		
+		 Label label = new Label(shell,SWT.CENTER);
+		  label.setText("connect to:");
+		  label.setLayoutData(new GridData(SWT.FILL, SWT.FILL,false,false,1,1));
 
-		  Combo combo = new Combo(shell, SWT.DROP_DOWN);
-		  combo.setItems(ITEMS);
-		  combo.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 2, 2));
-		  combo.setText("connect to:");
-		
+		  Combo combo1 = new Combo(shell, SWT.DROP_DOWN);
+		  combo1.setItems(ITEMS);
+		  combo1.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 2));
+		  
+		  Button button = new Button(shell,SWT.BUTTON2);
+		  button.setText("connect");
+		  button.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, false, 1,1));
+		 
 	}
 
 	public static void main(String[] args) {
